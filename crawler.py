@@ -16,7 +16,7 @@ import re
 
 import requests
 
-NOTIFICATION_PATTERN = re.compile("<a href=\"([^/]*?)(?P<path>.*?)\" target=\"_blank\">(?P<title>.*?)</a><span class=\"rq\">")
+NOTIFICATION_PATTERN = re.compile("<a href=\"[^/]*?(?P<path>.*?)\" target=\"_blank\">(?P<title>.*?)</a><span class=\"rq\">")
 
 NEXT_PAGE_LINK_PATTERN = re.compile("<a href=\"[^\d]*?(?P<num>\d+?)[^\d]*?\"\s+?class=\"Next\">下页</a>")
 
