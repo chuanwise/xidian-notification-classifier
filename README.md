@@ -9,6 +9,7 @@ The average accuracy is above `0.83` based on our published tiny dataset `2023-0
 Run `eval.py` to fit and eval our classifier. 
 
 ```
+WARN: 32 sample(s) hasn't label(s)! 
 test ratio = 0.05, acc = 0.8571428571428571
 test ratio = 0.1, acc = 0.8571428571428571
 test ratio = 0.15000000000000002, acc = 0.7857142857142857
@@ -31,7 +32,7 @@ test ratio = 0.9500000000000003, acc = 0.7142857142857143
 mean acc: 0.8421052631578949
 ```
 
-The default dataset is `2024-01-23` set in variable `marked_json_path`. Change it to load our own dataset generated from following part. 
+The default dataset is `2024-01-04` set in variable `marked_json_path`. Change it to load our own dataset generated from following part. 
 
 ## Mark
 

@@ -17,7 +17,7 @@ import json
 import model
 
 # replace following line to your marked dataset
-marked_json_path = "data/2024-01-23/marked.json"
+marked_json_path = "data/2024-01-04/marked.json"
 
 with open(marked_json_path, "r", encoding="utf8") as file_descriptor:
     marked_notifications = json.load(file_descriptor)
@@ -26,7 +26,7 @@ len_before_filtering = len(marked_notifications)
 marked_notifications = [element for element in marked_notifications.values() if "label" in element.keys()]
 len_after_filtering = len(marked_notifications)
 
-if len_after_filtering != len_after_filtering:
+if len_before_filtering != len_after_filtering:
     print(f"WARN: {len_before_filtering - len_after_filtering} sample(s) hasn't label(s)! ")
 
 test_ratio = 0.05
