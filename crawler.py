@@ -16,7 +16,7 @@ import re
 
 import requests
 
-NOTIFICATION_PATTERN = re.compile("<a href=\"(?P<path>.*?)\" target=\"_blank\">(?P<title>.*?)</a><span class=\"rq\">")
+NOTIFICATION_PATTERN = re.compile("<a href=\"([^/]*?)(?P<path>.*?)\" target=\"_blank\">(?P<title>.*?)</a><span class=\"rq\">")
 
 NEXT_PAGE_LINK_PATTERN = re.compile("<a href=\"[^\d]*?(?P<num>\d+?)[^\d]*?\"\s+?class=\"Next\">下页</a>")
 
@@ -48,6 +48,13 @@ def _append_notifications_from_single_page(notifications: list[tuple[str, str]],
     response_content = _get_decoded_content(url)
     notifications += NOTIFICATION_PATTERN.findall(response_content)
     return NEXT_PAGE_LINK_PATTERN.findall(response_content)[0]
+
+
+def crawl_notification_content(url: str) -> str:
+    response_content = _get_decoded_content(url)
+    detail_begin = response_content.index("<div class=\"detail ar_article\">")
+    detail_end = response_content.index("<div id=\"div_vote_id\">")
+    return response_content[detail_begin: detail_end]
 
 
 if __name__ == '__main__':
