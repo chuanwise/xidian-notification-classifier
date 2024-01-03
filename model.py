@@ -36,10 +36,10 @@ def fit_and_evaluation(marked_notifications: list, test_ratio=0.3, kernel="rbf",
     test = marked_notifications[:test_len]
     train = marked_notifications[test_len:]
 
-    train_X = [to_vector(element["content"]) for element in train]
+    train_X = [to_vector(element["title"] + "," + element["content"]) for element in train]
     train_y = [1 if element["label"] else 0 for element in train]
 
-    test_X = [to_vector(element["content"]) for element in test]
+    test_X = [to_vector(element["title"] + "," + element["content"]) for element in test]
     test_y = [1 if element["label"] else 0 for element in test]
 
     standard_scaler = sklearn.preprocessing.StandardScaler()
