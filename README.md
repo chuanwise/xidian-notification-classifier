@@ -55,3 +55,6 @@ limitations under the License.
 
 ## Appreciations
 
+1. **Prof. XK Ma**: my teacher in course `Maching Learning`. 
+2. [Text to Vector Model](https://huggingface.co/shibing624/text2vec-base-chinese): used to embedding notification content in our project. 
+3. [PyCharm](https://www.jetbrains.com/pycharm/): one of the most useful python IDEs. 
