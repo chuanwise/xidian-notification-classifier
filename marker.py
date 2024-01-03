@@ -33,7 +33,7 @@ import crawler
 
 def main():
     # set dataset name
-    default_dataset_name = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    default_dataset_name = time.strftime("%Y-%m-%d", time.localtime())
     dataset_name = input(f"Input dataset name [default: {default_dataset_name}]: ")
     dataset_name = dataset_name if len(dataset_name) else default_dataset_name
 
