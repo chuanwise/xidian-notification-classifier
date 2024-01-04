@@ -14,6 +14,8 @@
 
 import json
 
+import numpy
+
 import model
 
 # replace following line to your marked dataset
@@ -29,18 +31,16 @@ len_after_filtering = len(marked_notifications)
 if len_before_filtering != len_after_filtering:
     print(f"WARN: {len_before_filtering - len_after_filtering} sample(s) hasn't label(s)! ")
 
-test_ratio = 0.05
+test_ratio = 0.2
 test_count = 0
 
-acc_sum = 0
-while test_ratio < 1:
-    accuracy = model.fit_and_evaluation(marked_notifications, 0.15)
-    acc_sum += accuracy
+accuracy_sum = 0
+cs = list((0.01, 0.1)) + list(range(1, 10))
 
-    print(f"test ratio = {test_ratio}, acc = {accuracy}")
 
-    test_ratio += 0.05
-    test_count += 1
+for c in cs:
+    accuracy = model.fit_and_evaluation(marked_notifications, model.pure_title_processor, test_ratio, c)
+    accuracy_sum += accuracy
+    print(f"c = {c}, accuracy = {accuracy}")
 
-print(f"mean acc: {acc_sum / test_count}")
-
+print(f"mean accuracy: {accuracy_sum / len(cs)}")

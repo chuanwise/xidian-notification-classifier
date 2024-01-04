@@ -13,8 +13,9 @@
 #  limitations under the License.
 import random
 
-import text2vec
+import numpy
 import sklearn.svm
+import text2vec
 
 TEXT_TO_VECTOR_MODEL = text2vec.SentenceModel("shibing624/text2vec-base-chinese")
 
@@ -23,11 +24,29 @@ def to_vector(text: str):
     return TEXT_TO_VECTOR_MODEL.encode(text)
 
 
-def fit_and_evaluation(marked_notifications: list, test_ratio=0.3, kernel="rbf", gamma="scale") -> float:
+def pure_content_processor(sample: dict):
+    return to_vector(sample["content"])
+
+
+def pure_title_processor(sample: dict):
+    return to_vector(sample["title"])
+
+
+def title_and_content_processor(sample: dict):
+    return to_vector(sample["title"] + ", " + sample["content"])
+
+
+def title_cat_content_processor(sample: dict):
+    return numpy.concatenate((to_vector(sample["title"]), to_vector(sample["content"])))
+
+
+
+
+def fit_and_evaluation(marked_notifications: list, input_processor, test_ratio=0.3, c=0.05) -> float:
     model = sklearn.svm.SVC(
-        C=1.0,
-        kernel=kernel,
-        gamma=gamma
+        C=c,
+        kernel="rbf",
+        gamma="scale"
     )
 
     random.shuffle(marked_notifications)
@@ -36,10 +55,10 @@ def fit_and_evaluation(marked_notifications: list, test_ratio=0.3, kernel="rbf",
     test = marked_notifications[:test_len]
     train = marked_notifications[test_len:]
 
-    train_X = [to_vector(element["title"] + "," + element["content"]) for element in train]
+    train_X = [input_processor(element) for element in train]
     train_y = [1 if element["label"] else 0 for element in train]
 
-    test_X = [to_vector(element["title"] + "," + element["content"]) for element in test]
+    test_X = [input_processor(element) for element in test]
     test_y = [1 if element["label"] else 0 for element in test]
 
     standard_scaler = sklearn.preprocessing.StandardScaler()

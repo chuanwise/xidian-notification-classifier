@@ -2,41 +2,33 @@
 
 This project is a classifier to find to which notification you should pay attention. 
 
-The average accuracy is above `0.83` based on our published tiny dataset `2023-01-04` with less than 100 samples. We believe that it may be above `0.93` with more data. 
+The average accuracy is above `90%` based on our published tiny dataset `2023-01-04` with less than 100 samples. 
 
-## Eval
+## Fit and Test
 
-Run `eval.py` to fit and eval our classifier. 
+Run `fit_and_test.py` to fit and eval our classifier. 
 
 ```
-WARN: 32 sample(s) hasn't label(s)! 
-test ratio = 0.05, acc = 0.8571428571428571
-test ratio = 0.1, acc = 0.8571428571428571
-test ratio = 0.15000000000000002, acc = 0.7857142857142857
-test ratio = 0.2, acc = 0.7857142857142857
-test ratio = 0.25, acc = 0.7142857142857143
-test ratio = 0.3, acc = 0.8571428571428571
-test ratio = 0.35, acc = 0.9285714285714286
-test ratio = 0.39999999999999997, acc = 0.9285714285714286
-test ratio = 0.44999999999999996, acc = 0.8571428571428571
-test ratio = 0.49999999999999994, acc = 0.8571428571428571
-test ratio = 0.5499999999999999, acc = 0.7142857142857143
-test ratio = 0.6, acc = 0.9285714285714286
-test ratio = 0.65, acc = 0.8571428571428571
-test ratio = 0.7000000000000001, acc = 0.8571428571428571
-test ratio = 0.7500000000000001, acc = 0.9285714285714286
-test ratio = 0.8000000000000002, acc = 0.9285714285714286
-test ratio = 0.8500000000000002, acc = 0.7857142857142857
-test ratio = 0.9000000000000002, acc = 0.8571428571428571
-test ratio = 0.9500000000000003, acc = 0.7142857142857143
-mean acc: 0.8421052631578949
+WARN: 32 sample(s) hasn't label(s)!
+c = 0.01, accuracy = 0.9473684210526315
+c = 0.1, accuracy = 0.8947368421052632
+c = 1, accuracy = 0.8947368421052632
+c = 2, accuracy = 0.8421052631578947
+c = 3, accuracy = 0.9473684210526315
+c = 4, accuracy = 0.9473684210526315
+c = 5, accuracy = 0.8947368421052632
+c = 6, accuracy = 0.8947368421052632
+c = 7, accuracy = 0.9473684210526315
+c = 8, accuracy = 0.9473684210526315
+c = 9, accuracy = 0.8947368421052632
+mean accuracy: 0.9138755980861244
 ```
 
-The default dataset is `2024-01-04` set in variable `marked_json_path`. Change it to load our own dataset generated from following part. 
+The default dataset is `2024-01-04` set by variable `marked_json_path`. Change it to load our own dataset generated from following part. 
 
-## Mark
+## Crawl and Mark
 
-To generate your own custom dataset, run `marker.py` to crawl some latest notifications published in [XiDian University CS Department Page](https://cs.xidian.edu.cn/tzgg.htm) and mark them as interested or not interested. 
+To generate your own dataset, run `marker.py` to crawl some latest notifications published in [XiDian University CS Department Page](https://cs.xidian.edu.cn/tzgg.htm) and mark them as interested or not interested. 
 
 ```
 Input dataset name [default: 2024-01-04]:           # press enter to use defualt one directly
@@ -55,7 +47,7 @@ label: [y]                                          # press enter to mark it as 
 
 Crawled and marked data will be storage in `data/${dataset}/marked.json` (default). 
 
-Change variable `marked_json_path` in `eval.py` and run it to use your custom dataset. 
+Change variable `marked_json_path` in `fit_and_test.py` and run it to use your custom dataset. 
 
 ## License
 
@@ -79,6 +71,7 @@ limitations under the License.
 
 ## Appreciations
 
-1. **Prof. XK Ma**: my teacher in course `Maching Learning`. 
+1. [Prof. Xiaoke Ma](https://web.xidian.edu.cn/xkma/index.html): my teacher of the course `Maching Learning`. 
 2. [Text to Vector Model](https://huggingface.co/shibing624/text2vec-base-chinese): used to embedding notification content in our project. 
+3. [Lclbm](https://github.com/lclbm): one of my best friend. 
 3. [PyCharm](https://www.jetbrains.com/pycharm/): one of the most useful python IDEs. 
